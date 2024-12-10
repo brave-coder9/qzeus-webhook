@@ -13,9 +13,6 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Qzeus!");
 });
-app.post("/", (req, res) => {
-  res.send("POST Qzeus!");
-});
 
 // Webhook endpoint
 app.post("/qzeus/webhook", async (req, res, next) => {
@@ -35,6 +32,10 @@ app.post("/qzeus/webhook", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+app.post("/", (req, res) => {
+  res.send("POST Qzeus!");
 });
 
 app.listen(port, () => {
