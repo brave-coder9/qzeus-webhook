@@ -1,8 +1,28 @@
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
+const { Server } = require("socket.io");
 
 const app = express();
 const port = 3000;
+
+const server = http.createServer(app);
+
+// Socket
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+io.on("connection", (socket) => {
+  console.log("A client connected:", socket.id);
+
+  // Handle client disconnection
+  socket.on("disconnect", () => {
+    console.log("A client disconnected:", socket.id);
+  });
+});
 
 // Enable CORS
 app.use(cors());
@@ -25,6 +45,8 @@ app.post("/qzeus/webhook", (req, res, next) => {
       // Handle the payload here
       console.log(payload);
 
+      io.emit("qzeus-webhook", payload);
+
       // Respond to the webhook request
       res
         .status(200)
@@ -37,6 +59,6 @@ app.post("/qzeus/webhook", (req, res, next) => {
   }
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
