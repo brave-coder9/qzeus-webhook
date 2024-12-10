@@ -13,6 +13,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Qzeus!");
 });
+app.post("/", (req, res) => {
+  res.send("POST Qzeus!");
+});
 
 // Webhook endpoint
 app.post("/qzeus/webhook", async (req, res, next) => {
