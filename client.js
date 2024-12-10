@@ -23,8 +23,8 @@ const openUrl = (url) => {
   });
 };
 
-// const server_url = "https://qzeus-webhook.vercel.app";
-const server_url = "http://localhost:3000";
+const server_url = "http://45.63.76.217:4000";
+// const server_url = "http://localhost:3000";
 const socket = io(server_url, {
   reconnect: true,
 });
