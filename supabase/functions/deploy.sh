@@ -1,0 +1,1 @@
+npx supabase functions deploy qzeus-webhook --project-ref oljhyjkvydyxkpiotgwm

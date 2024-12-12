@@ -23,8 +23,8 @@ const openUrl = (url) => {
   });
 };
 
-const server_url = "http://45.63.76.217:8080";
-// const server_url = "http://localhost:3000";
+// const server_url = "http://45.63.76.217:8080";
+const server_url = "http://localhost:8080";
 const socket = io(server_url, {
   reconnect: true,
 });
@@ -43,5 +43,19 @@ socket.on("connect_error", (error) => {
 
 socket.on("qzeus-webhook", (payload) => {
   console.log("Received webhook event: ", payload);
-  openUrl("https://www.google.com/ncr");
+  if (payload && payload.includes("long")) {
+    openUrl(
+      "https://trigger.keyboardmaestro.com/t/C272AE09-7B99-4117-AE8E-8F381FC35C4E/88114BB1-9FED-41D3-B164-47A8A01D8B2A?TriggerValue"
+    );
+  }
+  if (payload && payload.includes("short")) {
+    openUrl(
+      "https://trigger.keyboardmaestro.com/t/C272AE09-7B99-4117-AE8E-8F381FC35C4E/88114BB1-9FED-41D3-B164-47A8A01D8B2A?TriggerValue"
+    );
+  }
+  if (payload && payload.includes("close")) {
+    openUrl(
+      "https://trigger.keyboardmaestro.com/t/C272AE09-7B99-4117-AE8E-8F381FC35C4E/88114BB1-9FED-41D3-B164-47A8A01D8B2A?TriggerValue"
+    );
+  }
 });
